@@ -26,3 +26,4 @@ let maxSubArray = function(nums) {
     }
     return potential[right]-potential[left]
 }
+
