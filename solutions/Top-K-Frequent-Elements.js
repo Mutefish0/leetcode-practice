@@ -1,3 +1,40 @@
+class Puremap{
+    constructor(){
+        this.keys = []
+        this.values = []
+        this.entry = {}
+        this.length = 0
+        this.key_index = {}
+    }
+    setDuplicate(duplicate){
+        this.duplicate = duplicate
+    }
+    push(key,value){
+        if(this.entry[key]===undefined) {
+            this.entry[key] = value
+            this.keys.push(key)
+            this.values.push(value)
+            this.key_index[key] = this.length
+            this.length += 1
+        }
+        else if(this.duplicate){
+            let newValue = this.duplicate(value,this.entry[key])
+            this.entry[key] = newValue
+            this.values[this.key_index[key]] = newValue
+        }
+    }
+    produce(){
+        let ret = new Puremap()
+        ret.setDuplicate((value,oldValue)=>{
+            oldValue.push(value[0])
+            return oldValue
+        })
+        for(let i=0;i<this.length;i++)
+            ret.push(this.values[i],[this.keys[i]])
+        ret.setDuplicate(null)
+        return ret 
+    }
+}
 
 function CountingSort(A,k){
     let length = A.length
