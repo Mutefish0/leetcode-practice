@@ -7,7 +7,7 @@ function Measurer(delegate){
 }
 
 //return new array 
-//数组A中的所有元素必须小于或等于k
+//数组A中的所有元素必须大于零小于或等于k且是是整数
 function CountingSort(A,k){
     let length = A.length
     let C = []
@@ -15,7 +15,7 @@ function CountingSort(A,k){
     for(i=0;i<=k;i++) C[i] = 0
     for(i=0;i<length;i++) C[A[i]] += 1
     for(i=1;i<=k;i++) C[i] = C[i-1] + C[i]
-    for(i=0;i<length;i++){
+    for(i=length-1;i>=0;i--){
         B[C[A[i]]-1] = A[i]
         C[A[i]] -= 1
     }
@@ -59,4 +59,3 @@ class Puremap{
         return ret 
     }
 }
-
