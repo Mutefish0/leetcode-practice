@@ -1,3 +1,4 @@
+//暴力求解
 var containsNearbyAlmostDuplicate = function(nums, k, t) {
     let length = nums.length 
     let end
@@ -8,3 +9,4 @@ var containsNearbyAlmostDuplicate = function(nums, k, t) {
     }
     return false
 }
+
