@@ -17,9 +17,11 @@ var findLadders = function(beginWord, endWord, wordList) {
     for(var i=0,len=nodeList.length;i<len;i++)
         nodeList[i].setNeighbors(nodeList)
     
+    //BFS建立广度优先树（从end到begin建立，便于后面从begin到end添加路径）
     var queue = [end] 
     while(queue.length>0) {
         var head = queue.shift()
+        //指向begin的节点出队，即所有从end到begin的最短路径已经建立
         if(head.val===begin.val) break  
 
         head.color = 'black'
@@ -32,18 +34,20 @@ var findLadders = function(beginWord, endWord, wordList) {
                 node.PIs.push(head)
                 queue.push(node)
             }
+            //不同于常规广度优先树，入队顺序不同而导致树不同，在此，PI属性是一个数组，可以指向多个节点
+            //由于一个节点有多个父节点，建立起来的“树”其实已经不是树了
             else if(node.color==='gray'&&node.depth>head.depth) 
                 node.PIs.push(head)
         }
     }
     
     var paths = []
-
+    //用于表示path的节点
     queue = [{
         PIs: begin.PIs,     
         path: [begin.val]   
     }]
-    //收集所有路径
+    //还是广度优先,收集所有路径
     while(queue.length>0) {
         var head = queue.shift()
 
