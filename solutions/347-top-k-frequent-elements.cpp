@@ -13,11 +13,7 @@ class Solution {
     priority_queue<int, vector<int>, decltype(comp)> p_queue(comp);
     vector<int> result;
     for (int& num : nums) {
-      if (map.count(num)) {
-        map[num] = map[num] + 1;
-      } else {
-        map[num] = 1;
-      }
+      map[num]++;
     }
     for (auto& [key, value] : map) {
       p_queue.push(key);
