@@ -6,6 +6,9 @@ struct TrieNode {
   char ch;
   shared_ptr<TrieNode> children[26];
   TrieNode() : ch(0) {}
+
+ public:
+  shared_ptr<TrieNode> next(char ch) { return children[ch - 'a']; }
 };
 
 class Trie {
@@ -21,11 +24,11 @@ class Trie {
     auto p = root;
     auto it = word.begin();
     while (it != word.end() && p->children[*it - 'a']) {
-      p = p->children[*it++ - 'a'];
+      p = p->next(*it++);
     }
     while (it != word.end()) {
       p->children[*it - 'a'] = make_shared<TrieNode>();
-      p = p->children[*it++ - 'a'];
+      p = p->next(*it++);
     }
     p->ch = *(it - 1);
   }
@@ -35,7 +38,7 @@ class Trie {
     auto p = root;
     auto it = word.begin();
     while (it != word.end() && p->children[*it - 'a']) {
-      p = p->children[*it++ - 'a'];
+      p = p->next(*it++);
     }
     if (it == word.end() && p->ch) {
       return true;
@@ -49,7 +52,7 @@ class Trie {
     auto p = root;
     auto it = prefix.begin();
     while (it != prefix.end() && p->children[*it - 'a']) {
-      p = p->children[*it++ - 'a'];
+      p = p->next(*it++);
     }
     if (it == prefix.end()) {
       return true;

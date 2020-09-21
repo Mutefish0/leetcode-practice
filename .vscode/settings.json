@@ -67,6 +67,8 @@
     "utility": "cpp",
     "queue": "cpp",
     "__tree": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "stack": "cpp",
+    "unordered_set": "cpp"
   }
 }
