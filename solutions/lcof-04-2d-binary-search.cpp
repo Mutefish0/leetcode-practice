@@ -3,6 +3,7 @@
 
 using namespace std;
 // 二维的二分查找，非常巧妙
+// O(log(m*n))
 class Solution {
  private:
   vector<vector<int>>* matrix;
